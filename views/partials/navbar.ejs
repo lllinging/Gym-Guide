@@ -1,0 +1,50 @@
+<nav class="navbar position-relative sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">RenewMart</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <a class="nav-link" href="/gyms">RenewMart</a>
+        <a class="nav-link" href="/gyms/new">Sell Now</a>
+      </div>
+      <div class="navbar-nav ml-auto">
+        <% if (!currentUser) { %>
+          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/register">Register</a>
+        <% } else { %>
+          <span class="nav-link">Hi, <%= currentUser.username %></span>
+          <div class="user__profile d-flex align-items-center">
+            <% if (currentUser.avatar.length != 0) { %>
+              <img class="show__avatar" role="button" onclick="showUserInfo()" src="<%= currentUser.avatar[0].url %>"
+                alt="Avatar" />
+            <% } %>
+          </div>
+
+          <div class="user__info position-absolute top-100 end-0 p-3 d-none">
+            <!-- <div class="d-flex gap-2 border-bottom">
+            </div> -->
+            <div class="d-grid gap-3">
+              <div><a href="">My profile</a></div>
+              <div><a href="">My posts</a></div>
+              <div><a href="">My collections</a></div>
+              <div><a href="/logout">Logout</a></div>
+              <!-- <button class="btn btn-outline-none btn-sm" style="padding: 0;">
+                <a class="nav-link" style="padding: 0 0.2rem;" href="/logout">Logout</a> -->
+              <!-- </button> -->
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+<script>
+  function showUserInfo() {
+    const userInfo = document.querySelector('.user__info');
+    userInfo.classList.toggle("d-none");
+  }
+</script>

@@ -1,0 +1,105 @@
+<% layout('layouts/boilerplate')%>
+
+    <!-- //method not methods -->
+    <!-- <form action="/gyms/<%= gym._id%>?_method=PUT" method="POST">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="gym[title]" value="<%= gym.title %>">
+        </div>
+        <div>
+            <label for="location">Location</label>
+            <input type="text" id="location" name="gym[location]" value="<%= gym.location %>">
+        </div>
+        
+        <button>update Gym</button>
+    </form>
+    <a href="/gyms/<%= gym._id %>">Go back</a> -->
+
+
+
+
+    <div class="row">
+        <h1 class="text-center">Edit Gym</h1>
+        <div class="col-6 offset-3">
+            <form action="/gyms/<%= gym._id%>?_method=PUT" method="POST" novalidate class="validated-form"
+                enctype=multipart/form-data>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="gym[title]" value="<%= gym.title %>"
+                        required>
+                    <div class="valid-feedback">
+                        looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" name="gym[category]" id="category" aria-label="category">
+                        <option selected>Open this select menu</option>
+                        <option value="Tent"> Tent camping</option>
+                        <option value="Wild/free">Wild/free camping</option>
+                        <option value="Hammock">Hammock camping</option>
+                        <option value="Bike">Bike/motorcycle camping</option>
+                        <option value="Kayak">Kayak camping</option>
+                        <option value="Winter">Winter camping</option>
+                        <option value="Glamping">Glamping</option>
+                        <option value="Car">Car Camping</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="gym[location]"
+                        value="<%= gym.location %>" required>
+                </div>
+                <!-- <div class="mb-3">
+                    <label class="form-label" for="image">Add Images</label>
+                    <input  class="form-file-input" type="file" id="image"  name="image" multiple>
+                </div> -->
+                <div class="mb-3">
+                    <label class="form-label" for="price">Gym Price</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="price">$</span>
+                        <input type="text" class="form-control" placeholder="0" aria-label="price"
+                            aria-describedby="price-label" name="gym[price]" value="<%= gym.price %>" required>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="features">features</label>
+                    <textarea class="form-control" type="text" id="features" name="gym[features]"
+                        required><%= gym.features%></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="gym[description]"
+                        required><%= gym.description%></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <!-- <label for="">Upload Images</label> -->
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" plcaeholder="choose images..." id="image" name="image"
+                            multiple>
+                        <label class="input-group-text" for="image">Upload</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <% gym.images.forEach(function(image, i){ %>
+                        <img src="<%=image.thumbnail %>" class="img-thumbnail" alt="<%= gym.title %>">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%= i%>" name="deleteImages[]"
+                                value="<%= image.filename %>">
+                        </div>
+                        <label for="image-<%= i%>">Delete?</label>
+                        <% }) %>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Gym</button>
+                </div>
+
+            </form>
+            <a href="/gyms/<%= gym._id %>">Back To Gyms</a>
+
+        </div>
+    </div>

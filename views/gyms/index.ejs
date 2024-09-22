@@ -347,7 +347,7 @@
   
         try {
             console.log("gymId clicked from index", gymId);
-          const response = await fetch(`/gyms/toggle-favorite/${gymId}`, {
+          const response = await fetch(`/toggle-favorite/${gymId}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

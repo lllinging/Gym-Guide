@@ -44,3 +44,28 @@ module.exports.logout = (req, res, next) => {
     });
 }
 
+module.exports.addCollections = async (req, res) => {
+    const userId = req.user._id; // Assuming you have user authentication middleware
+    console.log("userId", userId);
+    const gymId = req.params.gymId;
+  
+    try {
+      const user = await User.findById(userId);
+      console.log("user from toggle favorites", user);
+      const isFavorite = user.favorites.includes(gymId);
+      console.log("isFavorite", isFavorite);
+  
+      if (isFavorite) {
+        user.favorites.pull(gymId);
+      } else {
+        user.favorites.push(gymId);
+        console.log("pushed gymId to favorites");
+      }
+  
+      await user.save();
+      res.json({ success: true, isFavorite: !isFavorite });
+    } catch (err) {
+      res.status(500).json({ success: false, message: 'Error toggling favorite' });
+    }
+  }
+

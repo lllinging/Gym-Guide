@@ -27,7 +27,6 @@ router.route('/:id')
 
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(gyms.renderEditForm));
 
-router.post('/toggle-favorite/:gymId', catchAsync(addCollections));
 
   
 module.exports = router;

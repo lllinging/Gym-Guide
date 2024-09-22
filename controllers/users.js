@@ -94,3 +94,17 @@ module.exports.viewMyPosts = async (req, res) => {
     }
 }
 
+module.exports.updateDescription = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        user.description = req.body.description;
+        await user.save();
+        req.flash('success', 'Description updated!');
+        res.redirect('/myProfile');
+    } catch (e) {
+        console.error(e);
+        req.flash('error', 'Could not update description.');
+        res.redirect('/myProfile');
+    }
+}
+

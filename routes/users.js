@@ -5,9 +5,6 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
 const users = require('../controllers/users');
 const Gym = require("../models/gyms");
-const { addCollections } = require('../controllers/users');
-const { viewMyCollections } = require('../controllers/users');
-const { viewMyPosts } = require('../controllers/users');
 
 const multer = require('multer');
 const { storage } = require('../cloudinary');
@@ -29,9 +26,9 @@ router.route('/login')
 
 router.get('/logout', users.logout);
 
-router.post('/toggle-favorite/:gymId', catchAsync(addCollections));
+router.post('/toggle-favorite/:gymId', catchAsync(users.addCollections));
 
-router.get('/myCollections', catchAsync(viewMyCollections));
+router.get('/myCollections', catchAsync(users.viewMyCollections));
 
 router.get('/myPosts', catchAsync(users.viewMyPosts));
 
@@ -45,19 +42,7 @@ router.get('/myProfile', async (req, res) => {
     }
 });
 
-router.post('/updateDescription', async (req, res) => {
-    try {
-        const user = await User.findById(req.user._id);
-        user.description = req.body.description;
-        await user.save();
-        req.flash('success', 'Description updated!');
-        res.redirect('/myProfile');
-    } catch (e) {
-        console.error(e);
-        req.flash('error', 'Could not update description.');
-        res.redirect('/myProfile');
-    }
-});
+router.post('/updateDescription', catchAsync(users.updateDescription));
 
 module.exports = router;
 

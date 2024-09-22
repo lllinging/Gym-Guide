@@ -1,10 +1,11 @@
 <% layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/stylesheets/stars.css">   
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <div id="cluster-map"></div>
 
 <div class="container" style="padding: 0px">
-    <form id="form__all" class="form-group" action="/gyms" method="GET">
+    <form id="form__all" id='submit' class="form-group" action="/gyms" method="GET">
     <h1 class="text-center mt-5"> All Gyms</h1>
     <div class="row g-3 my-3">
         <div class="col-md-2">
@@ -23,15 +24,9 @@
         </div>
         <div class="col-md-10">
             <div  class="d-flex "  style="margin-right: 0px">
-                <!-- <input class="form-control me-2" value=<%=query.search||''%> type="search"  name="search"  aria-label="Search"> -->
                 <input class="form-control me-2" type="search" name="search" value="<%= query.search || '' %>" aria-label="Search">
                 <button   class="btn btn-outline-success" onclick="handleSearch()">Search</button>
             </div>
-
-            <!-- <form action="/gyms" method="GET" class="d-flex " role="search" style="margin-right: 0px">
-                <input class="form-control me-2" type="search"  name="search"  aria-label="Search">
-                <button id="submit" onclick="fake(selectedValue)" class="btn btn-outline-success" type="submit">Search</button>
-            </form> -->
         </div>
     </div>
     
@@ -132,7 +127,6 @@
                     </div>
                 </div>
             </div>
-           
             <div class="main__content col-md-10 container">
                 <div class=" row row-cols-1 row-cols-md-3 g-3">
                         <% for (let gym of gyms) { %>          
@@ -158,7 +152,6 @@
                                             </a>
                                         </div>                                     
                                         <div class="card-subtitle mb-2 text-body-secondary d-flex"> 
-                                            <!-- ******************************** -->
                                         <% if (gym.reviews  && gym.reviews.length > 0 ) { %> 
                                             <%const sum = gym.reviews.reduce((total, review) => total + review.rating, 0); %>
                                             <%const average = sum / gym.reviews.length;
@@ -213,52 +206,67 @@
             
     </div>
     
-
     <div class="row row-cols-auto justify-content-center align-items-center pagination">
-        <div class="per__page mb-3">
-            <select class="form-select form-select-sm" aria-label="Small select example">
-                <option selected>Per Page</option>
-                <option value="1">10</option>
-                <option value="2">30</option>
-                <option value="3">50</option>
-                <option value="4">100</option>
-                <option value="5">all</option>
-              </select>
-        </div>
-        
-        <div class="page ">
-            <% if (page > 0) { %>
-                <ul class="pagination justify-content-center">
-                    <% if (current == 1) { %>
-                        <li class="disabled page-item"><a class="page-link">First</a></li>
-                    <% } else { %>
-                        <li class="page-item"><a class="page-link" href="/gyms/1">First</a></li>
-                    <% } %>
-                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-                    <% if (i !== 1) { %>
-                        <li class="disabled page-item"><a class="page-link">...</a></li>
-                    <% } %>
-                    <% for (; i <= (Number(current) + 4) && i <= page; i++) { %>
-                        <% if (i == current) { %>
-                            <li class="active page-item"><a class="page-link"><%= i %></a></li>
-                        <% } else { %>
-                            <li class="page-item"><a class="page-link" href="/gyms/<%= i %>"><%= i %></a></li>
-                        <% } %>
-                        <% if (i == Number(current) + 4 && i < page) { %>
-                            <li class="disabled page-item"><a class="page-link">...</a></li>
-                        <% } %>
-                    <% } %>
-                    <% if (current == page) { %>
-                        <li class="disabled page-item"><a class="page-link">Last</a></li>
-                    <% } else { %>
-                        <li class="page-item"><a class="page-link" href="/gyms/<%= page %>">Last</a></li>
-                    <% } %>
-                </ul>
-            <% } %>
-        </div>
+    <div class="per__page mb-3">
+        <select class="form-select form-select-sm" aria-label="Small select example">
+            <option selected>Per Page</option>
+            <option value="1">10</option>
+            <option value="2">30</option>
+            <option value="3">50</option>
+            <option value="4">100</option>
+            <option value="5">All</option>
+        </select>
     </div>
-    </form>
+
+    <div class="page">
+        <input type="hidden" name="page" id="page" value="1">
+        <% if (pages > 0) { %>
+            <ul class="pagination justify-content-center">
+                <% if (current == 1) { %>
+                    <li class="disabled page-item"><a class="page-link">First</a></li>
+                <% } else { %>
+                    <li class="page-item"><a class="page-link" onclick="First(1)">First</a></li>
+                <% } %>
     
+                <% if (Number(current) - 1 > 0) { %>
+                    <li class="page-item"><a class="page-link" onclick="First(<%= Number(current) - 1 %>)">Prev</a></li>
+                <% } else { %>
+                    <li class="disabled page-item"><a class="page-link">Prev</a></li>
+                <% } %>
+            
+                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1); %>
+            
+                <% if (i !== 1) { %>
+                    <li class="disabled"><a class="page-link">...</a></li>
+                <% } %>
+            
+                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                    <% if (i == current) { %>
+                        <li class="active page-item"><a class="page-link"><%= i %></a></li>
+                    <% } else { %>
+                        <li class="page-item"><a class="page-link" onclick="First(<%= i %>)"><%= i %></a></li>
+                    <% } %>
+            
+                    <% if (i == Number(current) + 4 && i < pages) { %>
+                        <li class="disabled"><a class="page-link">...</a></li>
+                    <% } %>
+                <% } %>
+            
+                <% if (Number(current) + 1 <= pages) { %>
+                    <li class="page-item"><a class="page-link" onclick="First(<%= Number(current) + 1 %>)">Next</a></li>
+                <% } else { %>
+                    <li class="disabled page-item"><a class="page-link">Next</a></li>
+                <% } %>
+            
+                <% if (current == pages) { %>
+                    <li class="disabled"><a class="page-link">Last</a></li>
+                <% } else { %>
+                    <li class="page-item"><a class="page-link" onclick="First(<%= pages %>)">Last</a></li>
+                    <% } %>
+            </ul>
+        <% } %>
+
+    </div>
     
 </div>
 
@@ -267,14 +275,13 @@
 
     const selectBox = document.getElementById("sort");
     const formButton = document.getElementById("form__all");
-
+    //handle search
     handleSearch = function() {
         formButton.submit();
     }
 
+    //handle sort
     selectBox.onchange = function() {
-        console.log("ssssssssssorttttttttttt");
-        console.log("ssssssssssorttttttttttt", this, selectBox.value);
         formButton.submit();
     }
 
@@ -287,7 +294,8 @@
         console.log("ssssssssssorfffffffff",  selectBox.value);
         formButton.submit();
     }
-
+    
+    //handle rating filter
     const ratingCheckBoxs = document.getElementsByClassName("form-check-input");
     for (let ratingCheckBox of ratingCheckBoxs) {
         ratingCheckBox.onchange = function() {
@@ -295,46 +303,14 @@
             const formButton = document.getElementById("form__all");
             formButton.submit();}
     }
-        // selectBox.click({sort: selectedValue});
-        // let button = document.getElementById("submit"); 
-        // const selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    // document.getElementById("page").value = a;
-    // let button = document.getElementById('submit'); button.click();
-        // console.log("sort&&&&&&&&&&&&&&&&&&&&&", selectedValue);
 
-        // button.click(selectedValue);
-
-
-        // const gyms = {};
-        // http://localhost:3000
-        // axios.get( "/gyms", {
-        //     params: {
-        //     sort: selectedValue
-        //     }
-        // })
-        // .then(function (response) {
-        //         // console.log("sorttttttttttt");
-        //     // handle success
-        //     console.log("dataaaaaaa", JSON.stringify(response.data));
-        //     console.log("dataaaaaaa", response.gyms);
-        //     console.log("dataaaaaaa", response.data.gyms);
-            
-        //     // gyms = response.data;
-
-        //     console.log("///////////////////////////////////////////////////---------------------"+JSON.stringify(response));
-        // })
-        // .catch(function (error) {
-        //     // handle error
-        //     console.log(error);
-        // })
-
-    // function fake(selectedValue) {
-    //     console.log("params", selectedValue);
-    // }
-    
+    //handle pagination
+    function First(a) {
+        console.log("First function");
+    document.getElementById("page").value = a;
+    formButton.submit();
+  }
 </script>
-
-
 
 <script>
     document.querySelectorAll('.favorite-btn').forEach(button => {
@@ -356,7 +332,6 @@
   
           const result = await response.json();
           if (result.success) {
-            // Toggle the button's style based on the favorite status
             this.classList.toggle('btn-success', result.isFavorite);
             this.classList.toggle('btn-outline-secondary', !result.isFavorite);
           }
@@ -367,14 +342,6 @@
     });
 
     const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
-
-    // function add(gyms){
-    //     for (let gym of gyms) {
-    //     gym.type = 'Feature';
-    //     }
-    //     console.log("6666666", gyms)
-    // }   
-    // add(gyms);
     
     var gyms = { features: <%- JSON.stringify(gyms) %> };
     console.log('88888888888888', gyms);
@@ -382,31 +349,5 @@
 
 </script>
 
-<!-- <script>
-    document.querySelectorAll('.favorite-btn').forEach(button => {
-      button.addEventListener('click', async function() {
-        const gymId = this.getAttribute('data-gym-id');
-  
-        try {
-            console.log("gymId clicked from index", gymId);
-          const response = await fetch(`/gyms/toggle-favorite/${gymId}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
-  
-          const result = await response.json();
-          if (result.success) {
-            // Toggle the button's style based on the favorite status
-            this.classList.toggle('btn-success', result.isFavorite);
-            this.classList.toggle('btn-outline-secondary', !result.isFavorite);
-          }
-        } catch (error) {
-          console.error('Error toggling favorite:', error);
-        }
-      });
-    });
-  </script> -->
 
 <script src="/javascripts/clusterMap.js"></script>

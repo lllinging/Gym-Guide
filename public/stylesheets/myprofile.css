@@ -1,0 +1,21 @@
+.left-side-profile {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px; 
+}
+
+.avatar-image-profile {
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover; 
+}
+
+.btn-myprofile {
+    color: black; 
+    border: 1px solid gray; 
+    border-radius: 5px; 
+    transition: box-shadow 0.2s; 
+}
+
+.btn-myprofile:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+}

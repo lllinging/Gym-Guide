@@ -1,0 +1,43 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/myprofile.css">
+
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Left Side: Avatar, Username, Email -->
+        <div class="col-md-4 left-side-profile">
+            <div class="card border-0">
+                <div class="card-body text-center">
+                    <img src="<%= user.avatar.length ? user.avatar[0].url : '/path/to/default-avatar.jpg' %>" class="avatar-image-profile rounded-circle mb-3" alt="Avatar">
+                    <h4 class="card-title"><%= user.username %></h4>
+                    <p class="card-text"><%= user.email %></p>
+                    <div class="d-flex justify-content-between mb-4">
+                        <a href="/myPosts" class="btn btn-myprofile">My Posts</a>
+                        <a href="/myCollections" class="btn btn-myprofile">My Collections</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Description -->
+        <div class="col-md-8">
+            <div class="card" style="background-color: white; border: none;">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="description" class="form-label">
+                            <i class="bi bi-info-circle-fill" style="font-size: 1.2rem;"></i> My Introduction:
+                        </label>
+                        <% if (user.description && user.description.trim().length > 0) { %>
+                            <p><%= user.description %></p>
+                        <% } else { %>
+                            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Add more information to describe yourself"></textarea>
+                        <% } %>
+                    </div>
+                    <button type="submit" class="btn <%= user.description && user.description.trim() ? 'editBtn' : 'btn-success saveBtn' %>">
+                        <%= user.description && user.description.trim() ? '' : 'Save' %>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

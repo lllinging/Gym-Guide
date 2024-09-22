@@ -35,5 +35,29 @@ router.get('/myCollections', catchAsync(viewMyCollections));
 
 router.get('/myPosts', catchAsync(users.viewMyPosts));
 
+router.get('/myProfile', async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        res.render('users/myProfile', { user });
+    } catch (e) {
+        console.error(e);
+        res.redirect('/');
+    }
+});
+
+router.post('/updateDescription', async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        user.description = req.body.description;
+        await user.save();
+        req.flash('success', 'Description updated!');
+        res.redirect('/myProfile');
+    } catch (e) {
+        console.error(e);
+        req.flash('error', 'Could not update description.');
+        res.redirect('/myProfile');
+    }
+});
+
 module.exports = router;
 

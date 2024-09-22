@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Gym = require('../models/gyms');
 
 module.exports.renderRegister = (req, res) => {
     res.render('users/register');
@@ -68,4 +69,15 @@ module.exports.addCollections = async (req, res) => {
       res.status(500).json({ success: false, message: 'Error toggling favorite' });
     }
   }
+
+  module.exports.viewMyCollections = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id); 
+        const gyms = await Gym.find({ _id: { $in: user.favorites } }); 
+        res.render('users/myCollections', { gyms });
+    } catch (e) {
+        console.error(e);
+        res.redirect('/');
+    }
+}
 

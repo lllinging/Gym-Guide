@@ -24,7 +24,7 @@ const seedDB = async () => {
         const random100 = Math.floor(Math.random() * 100);
         const price = Math.floor(Math.random() * 20 + 10);
         const category = `${sample(places)}`;
-        const index1 = Math.floor(Math.random() * 10);
+        const index1 = 1 + Math.floor(Math.random() * 10);
         const index2 = 1 + Math.floor(Math.random() * 10);
 
         const gym = new Gym({

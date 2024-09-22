@@ -64,12 +64,17 @@ module.exports.createGym = async (req, res, next) => {
         query: req.body.gym.location,
         limit: 1
     }).send();
-
+    //save to the gym model
+    const user = req.user;
     const gym = new Gym(req.body.gym);
     gym.geometry = geoData.body.features[0].geometry;
-    gym.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
-    gym.author = req.user._id;
+    gym.images = req.files.map(f => ({ url: f.path, filename: f.filename }));    
+    gym.author = user._id;
     await gym.save();
+    //save the post to the user model
+    user.posts.push(gym._id); 
+    await user.save(); 
+
     req.flash('success', 'Successfully made a new gym!');
     res.redirect(`/gyms/${gym._id}`);
 }

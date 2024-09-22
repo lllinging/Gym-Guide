@@ -1,6 +1,6 @@
 <nav class="navbar position-relative sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">RenewMart</a>
+    <a class="navbar-brand" href="#">GymGuide</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,8 +8,8 @@
     <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
-        <a class="nav-link" href="/gyms">RenewMart</a>
-        <a class="nav-link" href="/gyms/new">Sell Now</a>
+        <a class="nav-link" href="/gyms">All Gyms</a>
+        <a class="nav-link" href="/gyms/new">Add Gym</a>
       </div>
       <div class="navbar-nav ml-auto">
         <% if (!currentUser) { %>
@@ -28,9 +28,9 @@
             <!-- <div class="d-flex gap-2 border-bottom">
             </div> -->
             <div class="d-grid gap-3">
-              <div><a href="">My profile</a></div>
-              <div><a href="/myCollections">My posts</a></div>
-              <div><a href="">My collections</a></div>
+              <div><a href="/myProfile">My profile</a></div>
+              <div><a href="/myPosts">My posts</a></div>
+              <div><a href="/myCollections">My collections</a></div>
               <div><a href="/logout">Logout</a></div>
               <!-- <button class="btn btn-outline-none btn-sm" style="padding: 0;">
                 <a class="nav-link" style="padding: 0 0.2rem;" href="/logout">Logout</a> -->

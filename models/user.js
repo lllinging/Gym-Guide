@@ -27,6 +27,12 @@ const UserSchema = new Schema({
             ref: 'Gym'
         }
     ],
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Gym'
+        }
+    ]
 
 });
 

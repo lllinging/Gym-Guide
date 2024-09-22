@@ -7,6 +7,7 @@ const users = require('../controllers/users');
 const Gym = require("../models/gyms");
 const { addCollections } = require('../controllers/users');
 const { viewMyCollections } = require('../controllers/users');
+const { viewMyPosts } = require('../controllers/users');
 
 const multer = require('multer');
 const { storage } = require('../cloudinary');
@@ -31,6 +32,8 @@ router.get('/logout', users.logout);
 router.post('/toggle-favorite/:gymId', catchAsync(addCollections));
 
 router.get('/myCollections', catchAsync(viewMyCollections));
+
+router.get('/myPosts', catchAsync(users.viewMyPosts));
 
 module.exports = router;
 

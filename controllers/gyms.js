@@ -7,6 +7,7 @@ const mapBoxToken = process.env.MAPBOX_TOKEN;//we need to get the mapbox token f
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken }); //we need to pass the mapbox token to the geocoding service to authenticate the request to the mapbox API. mbxGeocoding is a function that is used to create a new geocoding service. we need to pass the mapbox token to the geocoding service to authenticate the request to the mapbox API. geoCoder is a geocoding service that is used to interact with the Mapbox geocoding API. geocoding is the process of converting addresses into geographic coordinates, which you can use to place markers on a map, or position the map              
 const { cloudinary } = require("../cloudinary");
 const gym = require("../models/gyms");
+const User = require("../models/user");
 
 
 module.exports.index = async (req, res, next) => {

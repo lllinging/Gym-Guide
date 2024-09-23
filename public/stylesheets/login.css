@@ -2,20 +2,27 @@ html, body {
     height: 100%; 
 }
 
-.login-box {
+.w-65 {
+    width: 65%;
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-button-box {
+    display: flex;
     justify-content: center;
- }
-
- .img-box {
-    padding: 0;
 }
 
-.card-title-box, .card-button-box {
-    text-align: center;
-}
-
-
-.login-button {
+.btn-login {
     border: 1px solid black; 
     background-color: transparent;
     color: black; 
@@ -24,8 +31,7 @@ html, body {
     border-radius: 5px; 
 }
 
-.login-button:hover {
+.btn-login:hover {
     background-color: gray;
     color: white; 
 }
-

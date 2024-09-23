@@ -2,52 +2,53 @@
     <link rel="stylesheet" href="/stylesheets/register.css">
 
     <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="row card-box">
-            <div class="col-md-8">
-                <div class="card shadow">
-                    <div class="row card-content no-gutters">
-                        <div class="col-md-6">
-                            <img src="/pictures/General/7.jpg" alt="Registration Image" class="img-fluid rounded-left" />
-                        </div>
-                        <div class="col-md-6 d-flex align-items-center">
-                            <div class="card-body">
-                                <h5 class="card-title">Register</h5>
-                                <form action="/register" method="POST" class="validated-form" novalidate enctype="multipart/form-data">
-                                    <div class="user__avatar mb-3">
-                                        <input type="file" name="image" id="image" accept="image/*" />
-                                        <div id="preview">
-                                            <div id="avatar"></div>
-                                            <button class="avatar__button" id="upload-button" aria-labelledby="image" aria-describedby="image">
-                                                <i class="bi bi-plus-circle"></i>
-                                            </button>
-                                        </div>
+        <div class="row w-65 card-box">
+            <div class="col-md-12">
+                <div class="card shadow d-flex flex-row">
+                    <div class="card-img-left w-50">
+                        <img src="/pictures/General/9.jpg" alt="Registration Image" class="img-fluid rounded-left" style="object-fit: cover; height: 100%;" />
+                    </div>
+                    <div class="w-50 d-flex align-items-center">
+                        <div class="card-body">
+                            <form action="/register" method="POST" class="validated-form" novalidate enctype="multipart/form-data">
+                                <div class="user__avatar mb-3">
+                                    <input type="file" name="image" id="image" accept="image/*" />
+                                    <div id="preview">
+                                        <div id="register_avatar"></div>
+                                        <button class="avatar__button" id="upload-button" aria-labelledby="image" aria-describedby="image">
+                                            <i class="bi bi-plus-circle"></i>
+                                        </button>
                                     </div>
+                                </div>
     
-                                    <div class="mb-3">
-                                        <label class="form-label" for="username">Username</label>
-                                        <input class="form-control" type="text" id="username" name="username" required autofocus>
-                                        <div class="valid-feedback">Looks good!</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="email">Email</label>
-                                        <input class="form-control" type="email" id="email" name="email" required>
-                                        <div class="valid-feedback">Looks good!</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="password">Password</label>
-                                        <input class="form-control" type="password" id="password" name="password" required>
-                                        <div class="valid-feedback">Looks good!</div>
-                                    </div>
-                                    <div class="mb-3 text-center">
-                                        <button class="btn btn-success btn-block">Register</button>
-                                    </div>
-                                </form>
-                            </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="username">Username</label>
+                                    <input class="form-control" type="text" id="username" name="username" required autofocus>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input class="form-control" type="email" id="email" name="email" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="password">Password</label>
+                                    <input class="form-control" type="password" id="password" name="password" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                                <div class="mb-3 text-center">
+                                    <button class="btn btn-register btn-block">Register</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <style>
+    </style>
+    
     
     <script src="/javascripts/register.js"></script>

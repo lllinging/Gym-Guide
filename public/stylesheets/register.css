@@ -1,84 +1,64 @@
-
-
-  .user__avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-
-  #avatar {
-    background-color:  rgb(218, 247, 236);
-    height: 200px;
-    width: 200px;
-    border: 3px solid rgb(140, 235, 199);
-    border-radius: 50%;
-    transition: background ease-out 200ms;
-  }
-  
-  #preview {
-    position: relative;
-  }
-  
-  input[type="file"] {
-    display: none;
-  }
-  
-  .avatar__button {
-    padding: 18px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    background-color: rgb(140, 235, 199);
-    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-      0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-    transition: background-color ease-out 120ms;
-    position: absolute;
-    right: -5%;
-    bottom: 0%;
-    line-height: 0;
-  }
-  
-  .avatar__button:hover {
-    background-color: rgb(51, 167, 122);
-  }
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-.container {
-  height: 100vh; 
-}
-
-.card-box {
-  align-items: center;
-  justify-content: center;
-}
-
-.card {
-border: none;
-}
-
-.card-content {
-  width: 500px;
-}
-
-.card img {
-  height: 100%;
-  object-fit: cover;
-}
-
-.card-body {
-  height: 100%;
+.user__avatar {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  
 }
 
-.row.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
+#register_avatar {
+  background-color:  rgb(218, 247, 236);
+  height: 200px;
+  width: 200px;
+  border: 3px solid rgb(140, 235, 199);
+  border-radius: 50%;
+  transition: background ease-out 200ms;
+}
+
+#preview {
+  position: relative;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.avatar__button {
+  padding: 18px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(140, 235, 199);
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  transition: background-color ease-out 120ms;
+  position: absolute;
+  right: -5%;
+  bottom: 0%;
+  line-height: 0;
+}
+
+.avatar__button:hover {
+  background-color: rgb(51, 167, 122);
+}
+
+.w-65 {
+  width: 65%;
+}
+.card-img-left {
+  padding: 0;
+}
+
+.btn-register {
+  border: 1px solid black; 
+  background-color: transparent;
+  color: black; 
+  padding: 5px 20px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  border-radius: 5px; 
+}
+
+.btn-register:hover {
+  background-color: gray;
+  color: white; 
 }
 

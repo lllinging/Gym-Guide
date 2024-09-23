@@ -1,37 +1,28 @@
 <% layout('layouts/boilerplate')%>
-<link rel="stylesheet" href="/stylesheets/login.css">
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="row login-box">
-        <div class="col-md-8">
-            <div class="card shadow">
-                <div class="row no-gutters">
-                    <div class="col-md-6 img-box">
-                        <img src="/pictures/General/16.jpg" 
-                             alt="Login Image" class="img-fluid rounded-left" />
+    <link rel="stylesheet" href="/stylesheets/login.css">
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="row w-65 card-box">
+            <div class="col-md-12">
+                <div class="card shadow d-flex flex-row">
+                    <div class="card-img-left w-50">
+                        <img src="/pictures/General/10.jpg" alt="Registration Image" class="img-fluid rounded-left" />
                     </div>
-                    <div class="col-md-6 d-flex align-items-center">
+                    <div class="w-50 d-flex align-items-center">
                         <div class="card-body">
-                            <div class="card-title-box">
-                                <h5 class="card-title">Login</h5>
-                            </div>                           
-                            <form action="/login" method="POST" class="validated-form" novalidate>
+                            <form action="/login" method="POST" class="validated-form" novalidate >
                                 <div class="mb-3">
                                     <label class="form-label" for="username">Username</label>
-                                    <input class="form-control" type="text" id="username" name="username" autofocus required>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
+                                    <input class="form-control" type="text" id="username" name="username" required autofocus>
+                                    <div class="valid-feedback">Looks good!</div>
                                 </div>
-
                                 <div class="mb-3">
                                     <label class="form-label" for="password">Password</label>
                                     <input class="form-control" type="password" id="password" name="password" required>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
+                                    <div class="valid-feedback">Looks good!</div>
                                 </div>
-                                <div class="card-button-box">
-                                    <button class="btn login-button btn-block">Login</button>
+                                <div class="mb-3 text-center">
+                                    <button class="btn btn-login btn-block">Login</button>
                                 </div>
                             </form>
                         </div>
@@ -40,6 +31,5 @@
             </div>
         </div>
     </div>
-</div>
-
-
+        
+    

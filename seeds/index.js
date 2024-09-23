@@ -35,11 +35,11 @@ const seedDB = async () => {
             images: [
                 {
                     url:  `/pictures/${category}/${index1}.jpg`,
-                    filename: 'YelpCamp/nhhmqd8zlzprbqejytwp'
+                    filename: 'GymGuide/nhhmqd8zlzprbqejytwp'
                 },
                 {
                     url: `/pictures/${category}/${index2}.jpg`,
-                    filename:  'YelpCamp/yrcfsnpaumhsis9atxsh'
+                    filename:  'GymGuide/yrcfsnpaumhsis9atxsh'
                 }
             ],
             price,

@@ -1,5 +1,5 @@
 {
-  "name": "yelpcamp-ll",
+  "name": "gym-guide",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -31,5 +31,6 @@
     "passport-local-mongoose": "^8.0.0",
     "sanitize-html": "^2.13.0"
   },
-  "description": ""
+  "description": "��#\u0000 \u0000G\u0000y\u0000m\u0000-\u0000G\u0000u\u0000i\u0000d\u0000e\u0000\r\u0000 \u0000\r\u0000 \u0000",
+  "devDependencies": {}
 }

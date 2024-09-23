@@ -14,14 +14,12 @@ selectBox.onchange = function() {
 const ratingCheckBoxs = document.getElementsByClassName("form-check-input");
 for (let ratingCheckBox of ratingCheckBoxs) {
     ratingCheckBox.onchange = function() {
-        console.log("dsdsfsadfsdfsfsdfsfdsfsfds");
         const formButton = document.getElementById("form__all");
         formButton.submit();}
 }
 
 //handle pagination
 function First(a) {
-    console.log("First function");
 document.getElementById("page").value = a;
 formButton.submit();
 }
@@ -40,7 +38,6 @@ document.querySelectorAll('.favorite-btn').forEach(button => {
             });
 
             const result = await response.json();
-            console.log("result from heart", result);
             if (result.success) {
                 const icon = this.querySelector('i');
                 if (icon.classList.contains('bi-heart')) {

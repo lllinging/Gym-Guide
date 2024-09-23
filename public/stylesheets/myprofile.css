@@ -21,15 +21,32 @@
 }
 
 .btn-myprofile {
-    color: black; 
-    border: 1px solid gray; 
     border-radius: 5px; 
     transition: box-shadow 0.2s; 
     width: 100%; 
     flex: 1; 
+    
 }
 
 .d-flex {
     gap: 10px;
 }
 
+.btn-save {
+    background-color: transparent;
+    padding: 5px 20px; 
+    border: 1px solid gray;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 5px; 
+}
+
+.btn-save:hover {
+    background-color: gray;
+    color: white; 
+}
+
+.description-btn {
+    border: 1px solid gray;
+    text-decoration: none;
+    color: black;
+    }

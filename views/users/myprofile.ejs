@@ -22,19 +22,21 @@
         <div class="col-md-8">
             <div class="card" style="background-color: white; border: none;">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label for="description" class="form-label">
-                            <i class="bi bi-info-circle-fill" style="font-size: 1.2rem;"></i> My Introduction:
-                        </label>
-                        <% if (user.description && user.description.trim().length > 0) { %>
-                            <p><%= user.description %></p>
-                        <% } else { %>
-                            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Add more information to describe yourself"></textarea>
-                        <% } %>
-                    </div>
-                    <button type="submit" class="btn <%= user.description && user.description.trim() ? 'editBtn' : 'btn-success saveBtn' %>">
-                        <%= user.description && user.description.trim() ? '' : 'Save' %>
-                    </button>
+                    <form action="/updateDescription" method="POST">
+                        <div class="mb-3">
+                            <label for="description" class="form-label">
+                                <i class="bi bi-info-circle-fill" style="font-size: 1.2rem;"></i> My Introduction:
+                            </label>
+                            <% if (user.description && user.description.trim().length > 0) { %>
+                                <p><%= user.description %></p>
+                            <% } else { %>
+                                <textarea class="form-control" name="description" id="description" rows="3" placeholder="Add more information to describe yourself"></textarea>
+                            <% } %>
+                        </div>
+                        <button type="submit" class="btn <%= user.description && user.description.trim() ? 'editBtn' : 'description-btn' %>">
+                            <%= user.description && user.description.trim() ? '' : 'Save' %>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

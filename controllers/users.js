@@ -10,11 +10,11 @@ module.exports.register = async (req, res, next) => {
     try {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
-        user.avatar = req.files ? req.files.map(f => ({ url: f.path, filename: f.filename })) : null;
+        user.avatar = req.files.length > 0 ? req.files.map(f => ({ url: f.path, filename: f.filename })) : [{ url: "/pictures/avatars/1.jpg", filename: "default-avatar" }];
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if (err) return next(err);
-            req.flash('success', 'Welcome to Yelp Camp!');
+            req.flash('success', 'Welcome to Gym Guide!');
             res.redirect('/gyms');
         })
     } catch (e) {
@@ -84,7 +84,7 @@ module.exports.viewMyPosts = async (req, res) => {
         res.render('users/myposts', { gyms });
     } catch (e) {
         console.error(e);
-        res.redirect('/');
+        res.render('/myProfile', { user });
     }
 }
 

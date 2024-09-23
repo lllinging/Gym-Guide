@@ -132,8 +132,6 @@
                                     <div class="card__image">
                                         <% if(gym.images.length) { %>
                                             <img crossorigin="anonymous" src="<%= gym.images[0].url %>" class="img-fluid" alt="<%= gym.title %>">
-                                        <% } else { %>
-                                            <img crossorigin="anonymous" src="https://res.cloudinary.com/dwkdvav2l/image/upload/v1716346418/YelpCamp/pbeme0n663dxkr9uxryk.png" class="img-fluid" alt="<%= gym.title %>">  
                                         <% } %>
                                     </div>
                                 </div>
@@ -142,9 +140,11 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between"> 
                                             <p class="card-title fw-bold"><%= gym.title %></p>
-                                            <a class="favorite-btn" data-gym-id="<%= gym._id %>">
-                                                <i class="<%= currentUser.favorites.includes(gym._id.toString()) ? 'bi bi-heart-fill text-danger' : 'bi bi-heart' %>"></i>
-                                            </a>
+                                            <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+                                                <a class="favorite-btn" data-gym-id="<%= gym._id %>">
+                                                    <i class="<%= currentUser.favorites.includes(gym._id.toString()) ? 'bi bi-heart-fill text-danger' : 'bi bi-heart' %>"></i>
+                                                </a>
+                                            <% } %>
                                         </div>                                   
                                         <div class="card-subtitle mb-2 text-body-secondary d-flex"> 
                                         <% if (gym.reviews  && gym.reviews.length > 0 ) { %> 
@@ -176,7 +176,8 @@
                             </div>
                         </div>
                         <% } %>
-                </div>
+                
+                    </div>
             </div>
         </div>
             

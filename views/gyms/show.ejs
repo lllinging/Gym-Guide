@@ -35,10 +35,10 @@
                 <li class="list-group-item text-muted">Category: <%= gym.category %></li>
                 <li class="list-group-item text-muted">Description: <%= gym.description %></li>
                 <li class="list-group-item text-muted">Location: <%= gym.location %></li>
-              <li class="list-group-item text-muted">Submitted by: <%= gym.author.username %></li>
+              <li class="list-group-item text-muted">Submitted by: <%= (gym.author?.username) ? gym.author.username : "Anonymous"%></li>
               <li class="list-group-item text-muted">Price: $<%= gym.price %>/night</li>
             </ul>
-            <% if(currentUser && gym.author.equals(currentUser._id)){ %>
+            <% if(currentUser && gym.author?.equals(currentUser._id)){ %>
             <div class="card-body" >
                 <a href="/gyms/<%= gym._id %>/edit" class="card-link btn btn-edit">Edit</a>
                 <form class="d-inline" action="/gyms/<%= gym._id %>?_method=DELETE" method="POST">

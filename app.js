@@ -33,9 +33,9 @@ db.once('open', () => {
 const app = express();
 
 app.engine('ejs', ejsMate);
-//purpose: to serve static files
+//to serve static files
 app.set('view engine', 'ejs');
-//purpose: in order to use the views folder
+//in order to use the views folder
 app.set('views', path.join(__dirname, 'views'));
 
 // req.body will be undefined if you don't have this line of code. we need to parse the body of the request using the following code:

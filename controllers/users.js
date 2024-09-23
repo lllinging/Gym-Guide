@@ -47,20 +47,16 @@ module.exports.logout = (req, res, next) => {
 
 module.exports.addCollections = async (req, res) => {
     const userId = req.user._id; // Assuming you have user authentication middleware
-    console.log("userId", userId);
     const gymId = req.params.gymId;
   
     try {
       const user = await User.findById(userId);
-      console.log("user from toggle favorites", user);
       const isFavorite = user.favorites.includes(gymId);
-      console.log("isFavorite", isFavorite);
   
       if (isFavorite) {
         user.favorites.pull(gymId);
       } else {
         user.favorites.push(gymId);
-        console.log("pushed gymId to favorites");
       }
   
       await user.save();
@@ -85,8 +81,6 @@ module.exports.viewMyPosts = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).populate('posts'); 
         const gyms = user.posts; 
-        console.log(user);
-        console.log(gyms);
         res.render('users/myposts', { gyms });
     } catch (e) {
         console.error(e);

@@ -1,34 +1,32 @@
 <% layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/stylesheets/stars.css">   
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/stylesheets/index.css">
 
-<div id="cluster-map"></div>
 
-<div class="container" style="padding: 0px">
+<!-- <div id="cluster-map"></div> -->
+<div class="container" >
     <form id="form__all" id='submit' class="form-group" action="/gyms" method="GET">
-    <h1 class="text-center mt-5"> All Gyms</h1>
     <div class="row g-3 my-3">
         <div class="col-md-2">
             <div class="d-flex justify-content-between">
-                <button style="background-color: transparent" onclick="handleSort()"><i class="bi bi-arrow-down-up"></i></button>
-                     <select name="sort" id="sort" class="form-select">
-                        <option value="" <%= query.sort === false ? "selected" : "" %>>Sort By</option>
-                        <option value="createTime,desc" <%= (query.sort || 'newest,desc').split(',')[0] === "newest" ? "selected" : "" %>>Newest</option>
-                        <option value="popularity,desc" <%= (query.sort || 'popularity,desc').split(',')[0] === "popularity" ? "selected" : "" %>>Popularity</option>
-                        <option value="rating,desc" <%= (query.sort || 'rating,desc').split(',')[0] === "rating" ? "selected" : "" %>>Rating</option>
-                        <option value="price,asc" <%= (query.sort || 'price,asc').split(',')[0] === "price" ? "selected" : "" %>>Price</option>
-                       
-                    </select>
+                <select name="sort" id="sort" class="form-select">
+                    <option value="" <%= query.sort === false ? "selected" : "" %>>Sort By</option>
+                    <option value="createTime,desc" <%= (query.sort || 'newest,desc').split(',')[0] === "newest" ? "selected" : "" %>>Newest</option>
+                    <option value="popularity,desc" <%= (query.sort || 'popularity,desc').split(',')[0] === "popularity" ? "selected" : "" %>>Popularity</option>
+                    <option value="rating,desc" <%= (query.sort || 'rating,desc').split(',')[0] === "rating" ? "selected" : "" %>>Rating</option>
+                    <option value="price,asc" <%= (query.sort || 'price,asc').split(',')[0] === "price" ? "selected" : "" %>>Price</option>
+                </select>
             </div>
-           
         </div>
-        <div class="col-md-10">
-            <div  class="d-flex "  style="margin-right: 0px">
+        <div class="col-md-10 search">
+            <div class="d-flex">
                 <input class="form-control me-2" type="search" name="search" value="<%= query.search || '' %>" aria-label="Search">
-                <button   class="btn btn-outline-success" onclick="handleSearch()">Search</button>
+                <button class="btn search-btn" onclick="handleSearch()">Search</button>
             </div>
         </div>
     </div>
+    
     
     <div class="main ">
         <div class="row g-3">
@@ -46,9 +44,6 @@
                                 <input class="form-check-input" type="radio" name="rating" id="exampleRadios1" value=4 <%=query.rating==="4"?"checked":""%>>
                                 <label class="form-check-label" for="exampleRadios1" value="4">
                                     4 stars & up
-                                    <!-- <p class="starability-result" data-rating="4.5">
-                                        Rated: 
-                                    </p> -->
                                 </label>
                             </div>
                             <div class="form-check">
@@ -69,7 +64,6 @@
                     <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-                    
                         Category
                         </button>
                     </h2>
@@ -134,23 +128,24 @@
  
                             <div class="card   mb-3 p-0">
                                 
-                                <div class="card__image">
-                                    <% if(gym.images.length) { %>
-                                    <img crossorigin="anonymous" src="<%= gym.images[0].url %>" class="img-fluid" alt="<%= gym.title %>">
-                                    <% } else { %>
-                                    <img crossorigin="anonymous" src="https://res.cloudinary.com/dwkdvav2l/image/upload/v1716346418/YelpCamp/pbeme0n663dxkr9uxryk.png" class="img-fluid" alt="<%= gym.title %>">  
-                                    <% } %>
-                        
+                                <div class="card">
+                                    <div class="card__image">
+                                        <% if(gym.images.length) { %>
+                                            <img crossorigin="anonymous" src="<%= gym.images[0].url %>" class="img-fluid" alt="<%= gym.title %>">
+                                        <% } else { %>
+                                            <img crossorigin="anonymous" src="https://res.cloudinary.com/dwkdvav2l/image/upload/v1716346418/YelpCamp/pbeme0n663dxkr9uxryk.png" class="img-fluid" alt="<%= gym.title %>">  
+                                        <% } %>
+                                    </div>
                                 </div>
+                                
                                 <div >
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between"> 
                                             <p class="card-title fw-bold"><%= gym.title %></p>
-                                            <a class="favorite-btn btn btn-outline-secondary <%= currentUser.favorites.includes(gym._id.toString()) ? 'btn-success' : '' %>" 
-                                                data-gym-id="<%= gym._id %>">
-                                                <i class="bi bi-heart"></i>
+                                            <a class="favorite-btn" data-gym-id="<%= gym._id %>">
+                                                <i class="<%= currentUser.favorites.includes(gym._id.toString()) ? 'bi bi-heart-fill text-danger' : 'bi bi-heart' %>"></i>
                                             </a>
-                                        </div>                                     
+                                        </div>                                   
                                         <div class="card-subtitle mb-2 text-body-secondary d-flex"> 
                                         <% if (gym.reviews  && gym.reviews.length > 0 ) { %> 
                                             <%const sum = gym.reviews.reduce((total, review) => total + review.rating, 0); %>
@@ -164,42 +159,23 @@
                                         <p class="ps-1"><%= gym.price == 0 ? "free" :  "$"+gym.price%></p>
                                         </div>
                                         
-                                        <p class="card-text" style="background-color: rgb(215, 247, 235);">Features: <%= gym.features %></p> 
+                                        <p class="card-text">Features: <%= gym.features %></p> 
                                         <div class="d-flex justify-content-between">
                                             <p class="card-text">
                                                 <small class="text-muted"><i class="bi bi-geo-alt"></i><%= gym.location %></small>
                                             </p>
-                                            <p style="color: rgba(33, 37, 41, 0.75)"><%= new Intl.DateTimeFormat('en-US').format(gym.createTime) %></p>
+                                            <p class="create-time"><%= new Intl.DateTimeFormat('en-US').format(gym.createTime) %></p>
             
                                         </div>
-                                        <div class="text-center" sytle="margin-top: auto">
-                                            <a href="/gyms/<%= gym._id %>" class="btn" style="background-color: rgb(10, 165, 93);">View More</a>
+                                        <div class="text-center" style="margin-top: auto">
+                                            <a href="/gyms/<%= gym._id %>" class="btn view-button">View More</a>
                                         </div>
-                                        <!-- <form action="">
-                                        <nav aria-label="...">
-                                            <ul class="pagination">
-                                                <li class="page-item disabled">
-                                                <a class="page-link">Previous</a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="/gyms">1</a></li>
-                                                <li class="page-item active" aria-current="page">
-                                                <a class="page-link" href="#">2</a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                <a class="page-link" href="#">Next</a>
-                                                </li>
-                                            </ul>
-                                            </nav>
-                                        </form> -->
                                     </div>
                                 </div>
                                 
                             </div>
                         </div>
                         <% } %>
-                    
-                    
                 </div>
             </div>
         </div>
@@ -207,147 +183,59 @@
     </div>
     
     <div class="row row-cols-auto justify-content-center align-items-center pagination">
-    <div class="per__page mb-3">
-        <select class="form-select form-select-sm" aria-label="Small select example">
-            <option selected>Per Page</option>
-            <option value="1">10</option>
-            <option value="2">30</option>
-            <option value="3">50</option>
-            <option value="4">100</option>
-            <option value="5">All</option>
-        </select>
-    </div>
 
-    <div class="page">
-        <input type="hidden" name="page" id="page" value="1">
-        <% if (pages > 0) { %>
-            <ul class="pagination justify-content-center">
-                <% if (current == 1) { %>
-                    <li class="disabled page-item"><a class="page-link">First</a></li>
-                <% } else { %>
-                    <li class="page-item"><a class="page-link" onclick="First(1)">First</a></li>
-                <% } %>
-    
-                <% if (Number(current) - 1 > 0) { %>
-                    <li class="page-item"><a class="page-link" onclick="First(<%= Number(current) - 1 %>)">Prev</a></li>
-                <% } else { %>
-                    <li class="disabled page-item"><a class="page-link">Prev</a></li>
-                <% } %>
-            
-                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1); %>
-            
-                <% if (i !== 1) { %>
-                    <li class="disabled"><a class="page-link">...</a></li>
-                <% } %>
-            
-                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-                    <% if (i == current) { %>
-                        <li class="active page-item"><a class="page-link"><%= i %></a></li>
+        <div class="page">
+            <input type="hidden" name="page" id="page" value="1">
+            <% if (pages > 0) { %>
+                <ul class="pagination justify-content-center">
+                    <% if (current == 1) { %>
+                        <li class="disabled page-item"><a class="page-link custom-page-link">First</a></li>
                     <% } else { %>
-                        <li class="page-item"><a class="page-link" onclick="First(<%= i %>)"><%= i %></a></li>
+                        <li class="page-item"><a class="page-link custom-page-link" onclick="First(1)">First</a></li>
                     <% } %>
-            
-                    <% if (i == Number(current) + 4 && i < pages) { %>
-                        <li class="disabled"><a class="page-link">...</a></li>
+        
+                    <% if (Number(current) - 1 > 0) { %>
+                        <li class="page-item"><a class="page-link custom-page-link" onclick="First(<%= Number(current) - 1 %>)">Prev</a></li>
+                    <% } else { %>
+                        <li class="disabled page-item"><a class="page-link custom-page-link">Prev</a></li>
                     <% } %>
-                <% } %>
-            
-                <% if (Number(current) + 1 <= pages) { %>
-                    <li class="page-item"><a class="page-link" onclick="First(<%= Number(current) + 1 %>)">Next</a></li>
-                <% } else { %>
-                    <li class="disabled page-item"><a class="page-link">Next</a></li>
-                <% } %>
-            
-                <% if (current == pages) { %>
-                    <li class="disabled"><a class="page-link">Last</a></li>
-                <% } else { %>
-                    <li class="page-item"><a class="page-link" onclick="First(<%= pages %>)">Last</a></li>
+                
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1); %>
+                
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a class="page-link custom-page-link">...</a></li>
                     <% } %>
-            </ul>
-        <% } %>
-
+                
+                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active page-item"><a class="page-link custom-page-link active-page"><%= i %></a></li>
+                        <% } else { %>
+                            <li class="page-item"><a class="page-link custom-page-link" onclick="First(<%= i %>)"><%= i %></a></li>
+                        <% } %>
+                
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                            <li class="disabled"><a class="page-link custom-page-link">...</a></li>
+                        <% } %>
+                    <% } %>
+                
+                    <% if (Number(current) + 1 <= pages) { %>
+                        <li class="page-item"><a class="page-link custom-page-link" onclick="First(<%= Number(current) + 1 %>)">Next</a></li>
+                    <% } else { %>
+                        <li class="disabled page-item"><a class="page-link custom-page-link">Next</a></li>
+                    <% } %>
+                
+                    <% if (current == pages) { %>
+                        <li class="disabled"><a class="page-link custom-page-link">Last</a></li>
+                    <% } else { %>
+                        <li class="page-item"><a class="page-link custom-page-link" onclick="First(<%= pages %>)">Last</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+        </div>
     </div>
     
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
-<script type="text/javascript">
-
-    const selectBox = document.getElementById("sort");
-    const formButton = document.getElementById("form__all");
-    //handle search
-    handleSearch = function() {
-        formButton.submit();
-    }
-
-    //handle sort
-    selectBox.onchange = function() {
-        formButton.submit();
-    }
-
-    handleSort = function() {
-        console.log("hanflerSortfunction");
-        console.log("ssssssssssorssssssssss", selectBox.value);
-        let [sort, order] = selectBox.value.split(",");
-        order = order === "asc" ? "desc" : "asc";
-        selectBox.value = `${sort}, ${order}`;
-        console.log("ssssssssssorfffffffff",  selectBox.value);
-        formButton.submit();
-    }
-    
-    //handle rating filter
-    const ratingCheckBoxs = document.getElementsByClassName("form-check-input");
-    for (let ratingCheckBox of ratingCheckBoxs) {
-        ratingCheckBox.onchange = function() {
-            console.log("dsdsfsadfsdfsfsdfsfdsfsfds");
-            const formButton = document.getElementById("form__all");
-            formButton.submit();}
-    }
-
-    //handle pagination
-    function First(a) {
-        console.log("First function");
-    document.getElementById("page").value = a;
-    formButton.submit();
-  }
-</script>
-
-<script>
-    document.querySelectorAll('.favorite-btn').forEach(button => {
-        console.log("gymId clicked from index");
-
-      button.addEventListener('click', async function() {
-        const gymId = this.getAttribute('data-gym-id');
-        console.log("gymId clicked from index");
-        console.log(gymId);
-  
-        try {
-            console.log("gymId clicked from index", gymId);
-          const response = await fetch(`/toggle-favorite/${gymId}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
-  
-          const result = await response.json();
-          if (result.success) {
-            this.classList.toggle('btn-success', result.isFavorite);
-            this.classList.toggle('btn-outline-secondary', !result.isFavorite);
-          }
-        } catch (error) {
-          console.error('Error toggling favorite:', error);
-        }
-      });
-    });
-
-    const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
-    
-    var gyms = { features: <%- JSON.stringify(gyms) %> };
-    console.log('88888888888888', gyms);
-    console.log('9999999999999999', gyms);
-
-</script>
-
-
+<script src="/javascripts/index.js"></script>
 <script src="/javascripts/clusterMap.js"></script>

@@ -1,0 +1,19 @@
+.btn-edit, .btn-delete, .btn-submit {
+    border: 1px solid black; 
+    background-color: transparent;
+    color: black; 
+    padding: 5px 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 5px; 
+}
+
+.btn-delete:hover, .btn-edit:hover, .btn-submit:hover {
+    background-color: gray;
+    color: white; 
+}
+
+.image {
+    width: 100%;            
+    height: 300px;         
+    object-fit: cover;    
+}

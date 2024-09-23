@@ -1,0 +1,75 @@
+.sort-arrow{
+    background-color: transparent;
+}
+
+.search{
+    margin-bottom: 16px;
+}
+
+.create-time{
+    color: rgba(33, 37, 41, 0.75);
+}
+
+.favorite-btn i.bi-heart {
+    color: gray; 
+    transition: color 0.3s; 
+}
+
+.favorite-btn i.bi-heart.text-danger {
+    color: red; 
+}
+
+.card__image img {
+    width: 100%;            
+    height: 200px;         
+    object-fit: cover;    
+}
+
+.search-btn {
+    color: black; 
+    border: 1px solid black; 
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.search-btn:hover {
+    background-color: gray; 
+    color: white; 
+}
+
+.view-button {
+    border: 1px solid black; 
+    background-color: transparent;
+    color: black; 
+    padding: 5px 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 5px; 
+}
+
+.view-button:hover {
+    background-color: gray;
+    color: white; 
+}
+
+.pagination .page-link {
+    color: black; 
+    border: 1px solid black; 
+}
+
+.pagination .page-link:hover {
+    background-color: gray; 
+    color: white;
+}
+
+.pagination .active .page-link,
+.pagination .page-item:hover .page-link {
+    background-color: gray;
+    color: white; 
+}
+
+.pagination .disabled .page-link {
+    color: gray; 
+    border: 1px solid gray; 
+}
+
+

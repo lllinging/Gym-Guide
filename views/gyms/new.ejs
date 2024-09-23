@@ -1,6 +1,5 @@
 <% layout('layouts/boilerplate')%>
-
-    <!-- //method not methods -->
+<link rel="stylesheet" href="/stylesheets/new.css">
     <div class="row">
         <h1 class="text-center">New Gym</h1>
         <div class="col-6 offset-3">
@@ -18,25 +17,12 @@
                     <input class="form-control" type="text" id="location" name="gym[location]" required>
                 </div>
                 <div class="mb-3">
-                    <!-- <label for="">Upload Images</label> -->
                     <div class="input-group mb-3">
                         <input type="file" class="form-control" plcaeholder="choose images..." id="image" name="image" multiple>
                         <label class="input-group-text" for="image">Upload</label>
                     </div>
                 </div>
 
-                    <!-- <div class="form-file custom-file">
-                        <input type="file" class="form-file-input" id="image" name="image" multiple>
-                        <label class="form-file-label" for="image">
-                            <span class="form-file-text custom-file-label">Choose image(s)...</span>
-                            <span class="form-file-button">Browse</span>
-                        </label>
-                    </div>
-                </div> -->
-                <!-- <div class="mb-3">
-                    <label class="form-label" for="image">Image Url</label>
-                    <input class="form-control" type="text" id="image" name="gym[image]" required>
-                </div> -->
                 <div class="mb-3">
                     <label class="form-label" for="price">Gym Price</label>
                     <div class="input-group mb-3">
@@ -66,12 +52,14 @@
                     </select>
                 </div>
                 
-                <div class="mb-3">
-                    <button class="btn btn-success">Add Gym</button>
+                <div class="mb-3 d-flex justify-content-around">
+                    <button class="btn btn-add">Add Gym</button>
+                    <button class="btn btn-cancel">
+                        <a href="/gyms" class="btn">Cancel</a>
+                    </button>
                 </div>
                 
             </form>
-            <a href="/gyms">Go back</a>
         </div>
     </div>
 

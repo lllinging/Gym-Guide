@@ -42,3 +42,43 @@
   .avatar__button:hover {
     background-color: rgb(51, 167, 122);
   }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  height: 100vh; 
+}
+
+.card-box {
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+border: none;
+}
+
+.card-content {
+  width: 500px;
+}
+
+.card img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+

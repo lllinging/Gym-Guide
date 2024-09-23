@@ -1,23 +1,5 @@
 <% layout('layouts/boilerplate')%>
-
-    <!-- //method not methods -->
-    <!-- <form action="/gyms/<%= gym._id%>?_method=PUT" method="POST">
-        <div>
-            <label for="title">Title</label>
-            <input type="text" id="title" name="gym[title]" value="<%= gym.title %>">
-        </div>
-        <div>
-            <label for="location">Location</label>
-            <input type="text" id="location" name="gym[location]" value="<%= gym.location %>">
-        </div>
-        
-        <button>update Gym</button>
-    </form>
-    <a href="/gyms/<%= gym._id %>">Go back</a> -->
-
-
-
-
+<link rel="stylesheet" href="/stylesheets/edit.css"> 
     <div class="row">
         <h1 class="text-center">Edit Gym</h1>
         <div class="col-6 offset-3">
@@ -45,10 +27,6 @@
                     <input class="form-control" type="text" id="location" name="gym[location]"
                         value="<%= gym.location %>" required>
                 </div>
-                <!-- <div class="mb-3">
-                    <label class="form-label" for="image">Add Images</label>
-                    <input  class="form-file-input" type="file" id="image"  name="image" multiple>
-                </div> -->
                 <div class="mb-3">
                     <label class="form-label" for="price">Gym Price</label>
                     <div class="input-group mb-3">
@@ -72,7 +50,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <!-- <label for="">Upload Images</label> -->
                     <div class="input-group mb-3">
                         <input type="file" class="form-control" plcaeholder="choose images..." id="image" name="image"
                             multiple>
@@ -90,12 +67,13 @@
                         <% }) %>
                 </div>
 
-                <div class="mb-3">
-                    <button class="btn btn-info">Update Gym</button>
+                <div class="mb-3 d-flex justify-content-around">
+                    <button class="btn btn-edit">Update Gym</button>
+                    <button class="btn btn-cancel">
+                        <a href="/gyms" class="btn">Cancel</a>
+                    </button>
                 </div>
-
             </form>
-            <a href="/gyms/<%= gym._id %>">Back To Gyms</a>
 
         </div>
     </div>

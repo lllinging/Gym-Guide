@@ -22,7 +22,7 @@ const helmet = require('helmet');
 
 const mongoSAnitize = require('express-mongo-sanitize');
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp');//other parameters can be added to the connect method
+mongoose.connect('mongodb://localhost:27017/gym-guide');//other parameters can be added to the connect method
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

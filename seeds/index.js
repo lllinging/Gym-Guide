@@ -8,7 +8,7 @@ const path = require('path');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp');//other parameters can be added to the connect method
+mongoose.connect('mongodb://localhost:27017/gym-guide');//other parameters can be added to the connect method
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -24,8 +24,8 @@ const seedDB = async () => {
         const random100 = Math.floor(Math.random() * 100);
         const price = Math.floor(Math.random() * 20 + 10);
         const category = `${sample(places)}`;
-        const index1 = 1 + Math.floor(Math.random() * 10);
-        const index2 = 1 + Math.floor(Math.random() * 10);
+        const index1 = 1 + Math.floor(Math.random() * 23);
+        const index2 = 1 + Math.floor(Math.random() * 23);
 
         const gym = new Gym({
             author: "664bfcb6b93fb22d08cbd3ee",
@@ -51,8 +51,8 @@ const seedDB = async () => {
                 ]
             },
 
-            description: `${sample(descriptors)}}`,
-            features: `${sample(descriptors)}}`,
+            description: `${sample(descriptors)}`,
+            features: `${sample(descriptors)}`,
             createTime: Date.now()
         });
         await gym.save();

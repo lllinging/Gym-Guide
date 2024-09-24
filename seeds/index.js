@@ -1,14 +1,16 @@
 //if we want to seed our database, we can run this file and run node seeds/index.js in the terminal
+const dotenv = require('dotenv');
+
+// Config
+dotenv.config({path: '../.env'});
 const mongoose = require('mongoose');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
 const Gym = require('../models/gyms');
 const express = require('express');
-const path = require('path');
 
-const app = express();
-
-mongoose.connect('mongodb://localhost:27017/gym-guide');//other parameters can be added to the connect method
+const dbUrl = process.env.DB_URL;
+mongoose.connect(dbUrl);//other parameters can be added to the connect method
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

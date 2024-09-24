@@ -22,7 +22,10 @@ const helmet = require('helmet');
 
 const mongoSAnitize = require('express-mongo-sanitize');
 
-mongoose.connect('mongodb://localhost:27017/gym-guide');//other parameters can be added to the connect method
+const MongoStore = require('connect-mongo');
+const dbUrl = process.env.DB_URL;
+// const dbUrl = process.env.DB_URL;
+mongoose.connect(dbUrl);//other parameters can be added to the connect method
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -95,9 +98,24 @@ app.use(
     })
 );
 
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret
+    }
+});
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e)
+})
+
 const sessionConfig = {
+    store,
     name: 'session', //name of the cookie to avoid the default name which is connect.sid to protect our app from attacks
-    secret: 'thisshouldbeabettersecret!',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {

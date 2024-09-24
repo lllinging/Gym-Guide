@@ -6,6 +6,7 @@ const User = require('../models/user');
 const users = require('../controllers/users');
 const Gym = require("../models/gyms");
 
+
 const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
@@ -32,15 +33,7 @@ router.get('/myCollections', catchAsync(users.viewMyCollections));
 
 router.get('/myPosts', catchAsync(users.viewMyPosts));
 
-router.get('/myProfile', async (req, res) => {
-    try {
-        const user = await User.findById(req.user._id);
-        res.render('users/myProfile', { user });
-    } catch (e) {
-        console.error(e);
-        res.redirect('/');
-    }
-});
+router.get('/myProfile', catchAsync(users.viewMyProfile));
 
 router.post('/updateDescription', catchAsync(users.updateDescription));
 

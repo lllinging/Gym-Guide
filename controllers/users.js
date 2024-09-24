@@ -77,6 +77,16 @@ module.exports.addCollections = async (req, res) => {
     }
 }
 
+module.exports.viewMyProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        res.render('users/myProfile', { user });
+    } catch (e) {
+        console.error(e);
+        res.redirect('/');
+    }
+}
+
 module.exports.viewMyPosts = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).populate('posts'); 

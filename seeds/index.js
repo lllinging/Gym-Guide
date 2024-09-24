@@ -6,16 +6,25 @@ const Gym = require('../models/gyms');
 const express = require('express');
 
 const dbUrl = process.env.DB_URL;
-mongoose.connect(dbUrl);//other parameters can be added to the connect method
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-    console.log('Database connected');
-});
+const connectDB = async () => {
+    try {
+        await mongoose.connect(dbUrl);
+    } catch (error) {
+        handleError(error);
+    }
+};
+
 
 const sample = array => array[Math.floor(Math.random() * array.length)];
 const seedDB = async () => {
+    await connectDB();
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', () => {
+        console.log('Database connected');
+    });
+
     await Gym.deleteMany({});
     for (let i = 0; i < 200; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
@@ -32,12 +41,12 @@ const seedDB = async () => {
             category,
             images: [
                 {
-                    url:  `/pictures/${category}/${index1}.jpg`,
+                    url: `/pictures/${category}/${index1}.jpg`,
                     filename: 'GymGuide/nhhmqd8zlzprbqejytwp'
                 },
                 {
                     url: `/pictures/${category}/${index2}.jpg`,
-                    filename:  'GymGuide/yrcfsnpaumhsis9atxsh'
+                    filename: 'GymGuide/yrcfsnpaumhsis9atxsh'
                 }
             ],
             price,

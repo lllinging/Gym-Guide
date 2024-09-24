@@ -70,7 +70,7 @@ module.exports.addCollections = async (req, res) => {
     try {
         const user = await User.findById(req.user._id); 
         const gyms = await Gym.find({ _id: { $in: user.favorites } }); 
-        res.render('users/myCollections', { gyms });
+        res.render('users/mycollections', { gyms });
     } catch (e) {
         console.error(e);
         res.redirect('/');
@@ -80,7 +80,7 @@ module.exports.addCollections = async (req, res) => {
 module.exports.viewMyProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
-        res.render('users/myProfile', { user });
+        res.render('users/myprofile', { user });
     } catch (e) {
         console.error(e);
         res.redirect('/');

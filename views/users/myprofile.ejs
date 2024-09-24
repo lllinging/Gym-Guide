@@ -27,8 +27,8 @@
                             <label for="description" class="form-label">
                                 <i class="bi bi-info-circle-fill" style="font-size: 1.2rem;"></i> My Introduction:
                             </label>
-                            <% if (user.description && user.description.trim().length > 0) { %>
-                                <p><%= user.description %></p>
+                            <% if (currentUser.description && currentUser.description.trim().length > 0) { %>
+                                <p><%= currentUser.description %></p>
                             <% } else { %>
                                 <textarea class="form-control" name="description" id="description" rows="3" placeholder="Add more information to describe yourself"></textarea>
                             <% } %>

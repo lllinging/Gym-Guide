@@ -1,8 +1,4 @@
 //if we want to seed our database, we can run this file and run node seeds/index.js in the terminal
-const dotenv = require('dotenv');
-
-// Config
-dotenv.config({path: '../.env'});
 const mongoose = require('mongoose');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');

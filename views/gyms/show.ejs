@@ -36,7 +36,7 @@
                 <li class="list-group-item text-muted">Description: <%= gym.description %></li>
                 <li class="list-group-item text-muted">Location: <%= gym.location %></li>
               <li class="list-group-item text-muted">Submitted by: <%= (gym.author?.username) ? gym.author.username : "Anonymous"%></li>
-              <li class="list-group-item text-muted">Price: $<%= gym.price %>/night</li>
+              <li class="list-group-item text-muted">Price: $<%= gym.price %></li>
             </ul>
             <% if(currentUser && gym.author?.equals(currentUser._id)){ %>
             <div class="card-body" >
